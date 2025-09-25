@@ -1,0 +1,20 @@
+{
+    "sii6786": {
+        "id": "sii6786",
+        "key": "house_id",
+        "partition": [
+            [
+                "1-3",
+                "http://fdafdsf.com"
+            ],
+            [
+                "4-8",
+                "http://dgsdg.com"
+            ],
+            [
+                "9-*",
+                "https:fsdfsdf.com"
+            ]
+        ]
+    }
+}
