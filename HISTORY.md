@@ -1,5 +1,5 @@
 # History
 
-## 0.1.0 (2025-09-23)
+## 0.1.0 (2025-04-05)
 
-* First release on PyPI.
+* First release on Github.

@@ -51,37 +51,36 @@ Ready to contribute? Here's how to set up `pymongo_shard` for local development.
 
 3. Install your local copy into a virtualenv. Assuming you have virtualenvwrapper installed, this is how you set up your fork for local development:
 
-   ```sh
-   mkvirtualenv pymongo_shard
+   ```
+   python -m venv yourvirtualenv
    cd pymongo_shard/
-   python setup.py develop
+   pip install -e .
    ```
 
 4. Create a branch for local development:
 
    ```sh
-   git checkout -b name-of-your-bugfix-or-feature
+   git switch -c name-of-your-bugfix-or-feature
    ```
 
    Now you can make your changes locally.
 
-5. When you're done making changes, check that your changes pass flake8 and the tests, including testing other Python versions with tox:
+5. When you're done making changes, check that your changes pass pytest tests:
 
    ```sh
-   make lint
-   make test
+   pytest tests_pymongo_shard/*
    # Or
-   make test-all
+   pytest tests_pymongo_shard/* -vv
    ```
 
-   To get flake8 and tox, just pip install them into your virtualenv.
+   To run the tests, "pip install pytest pytest-mock requests-mock" into your virtualenv.
 
 6. Commit your changes and push your branch to GitHub:
 
    ```sh
    git add .
    git commit -m "Your detailed description of your changes."
-   git push origin name-of-your-bugfix-or-feature
+   git push master name-of-your-bugfix-or-feature
    ```
 
 7. Submit a pull request through the GitHub website.
@@ -91,28 +90,15 @@ Ready to contribute? Here's how to set up `pymongo_shard` for local development.
 Before you submit a pull request, check that it meets these guidelines:
 
 1. The pull request should include tests.
-2. If the pull request adds functionality, the docs should be updated. Put your new functionality into a function with a docstring, and add the feature to the list in README.md.
-3. The pull request should work for Python 3.12 and 3.13. Tests run in GitHub Actions on every pull request to the main branch, make sure that the tests pass for all supported Python versions.
+2. If the pull request adds functionality, the docs should be updated. Put your new functionality into a function with a docstring, write tests covering all edge cases for your new fuunction(s), and add the feature to the list in README.md.
+3. Ensure that your tests are included in file(s) contained in the tests_pymongo_shard folder and run using the process described in section 5 of Get Sarted section.
+4. The pull request should work for Python 3.11 or higher. 
 
-## Tips
-
-To run a subset of tests:
-
-```sh
-pytest tests.test_pymongo_shard
-```
 
 ## Deploying
 
-A reminder for the maintainers on how to deploy. Make sure all your changes are committed (including an entry in HISTORY.md). Then run:
+Make sure all your changes are committed (including an entry in HISTORY.md).
 
-```sh
-bump2version patch # possible: major / minor / patch
-git push
-git push --tags
-```
-
-You can set up a [GitHub Actions workflow](https://docs.github.com/en/actions/use-cases-and-examples/building-and-testing/building-and-testing-python#publishing-to-pypi) to automatically deploy your package to PyPI when you push a new tag.
 
 ## Code of Conduct
 
