@@ -12,8 +12,6 @@ from typing import Any
 from  pymongo import MongoClient
 
 
-
-
 class Retriever():
     """A class for retrieving data through a pymongo instance.
     """

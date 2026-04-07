@@ -1,5 +1,4 @@
-from setuptools import setup, find_packages
-
+from setuptools import setup
 setup(name='pymongo_shard',
       version='0.1.0',
       description ='',

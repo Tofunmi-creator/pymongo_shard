@@ -1,3 +1,4 @@
 from pymongo_shard.decorators import endpoint_django
 from pymongo_shard.decorators import endpoint_flask
 from pymongo_shard.decorators import endpoint_fastapi
+from pymongo_shard.method_getter import shard_method

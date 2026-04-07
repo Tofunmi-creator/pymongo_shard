@@ -1,4 +1,3 @@
-import json
 import re
 import requests
 import warnings
@@ -216,7 +215,7 @@ class ShardRequest:
             partition['command'] = self.command
             partition_key = partition['key']
             request_var = self.request_var[partition_key] if partition_key in self.request_var else dict()
-            shard_data = requests.post(partition['url'], json=json.dumps(partition), **request_var)
+            shard_data = requests.post(partition['url'], json=partition, **request_var)
             if shard_data.status_code != 200:
                 info={'status':'failed', 'key':partition['key'],'text':shard_data.text,
                       'error':f'Request failed with status code: {shard_data.status_code}'}

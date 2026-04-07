@@ -1,9 +1,8 @@
 import pytest
-from collections import Counter
+
 from pymongo_shard.data_retriever import Retriever  
 from tests_pymongo_shard.test_docs._variables import test_variable
 
-from pymongo_shard.shard_instance import ShardInstance 
 
 @pytest.fixture
 def my_mocker(mocker):

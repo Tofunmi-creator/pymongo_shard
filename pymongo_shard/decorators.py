@@ -1,4 +1,4 @@
-import json
+import functools
 from asgiref.sync import async_to_sync
 
 from pymongo_shard.data_retriever import Retriever
@@ -24,6 +24,8 @@ def endpoint_django(host: str="localhost", port: int=27017):
             function: The decorated function.
         """
         data_retriever = Retriever(host,port)
+
+        @functools.wraps(func)
         def wrapper(request,**kwargs):
             """The wrapper function.
 
@@ -35,7 +37,7 @@ def endpoint_django(host: str="localhost", port: int=27017):
                 Response: The response from the decorated function.
             """
             try:
-                query = json.loads(request.data)
+                query = request.data
                 kwargs['key'] = query['key']
                 kwargs['results'] = getattr(data_retriever,query['command'])(query)  
             except Exception as e:
@@ -68,6 +70,8 @@ def endpoint_fastapi(request_def,host: str="localhost", port: int=27017):
             function: The decorated function.
         """
         data_retriever = Retriever(host,port)
+
+        @functools.wraps(func)
         def wrapper(request:request_def, response=None):
             """The wrapper function.
 
@@ -79,8 +83,8 @@ def endpoint_fastapi(request_def,host: str="localhost", port: int=27017):
                 Response: The response from the decorated function.
             """   
             try:
-                response= dict()
-                query = json.loads(async_to_sync(request.json)())
+                response = dict()
+                query = async_to_sync(request.json)()
                 response['key'] = query['key']
                 response['results'] = getattr(data_retriever,query['command'])(query)
             except Exception as e:
@@ -103,6 +107,7 @@ def endpoint_flask(request, host: str="localhost", port: int=27017):
     Returns:
         function: The decorated function.
     """
+    
     def decorator(func):
         """The decorator function.
 
@@ -113,6 +118,8 @@ def endpoint_flask(request, host: str="localhost", port: int=27017):
             function: The decorated function.
         """
         data_retriever = Retriever(host,port)
+
+        @functools.wraps(func)
         def wrapper(results = None):   
             """The wrapper function.
 
@@ -122,9 +129,10 @@ def endpoint_flask(request, host: str="localhost", port: int=27017):
             Returns:
                 Response: The response from the decorated function.
             """
+           
             try:
                 results = dict()
-                query = json.loads(request.get_json())
+                query = request.get_json()
                 results['key'] = query['key']
                 results['results'] = getattr(data_retriever,query['command'])(query)
             except Exception as e:

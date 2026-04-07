@@ -1,1 +1,26 @@
-[]
+[
+    {
+        "id": "test1229",
+        "key": "user_id",
+        "partition": [
+            {
+                "database": "test",
+                "collection": "django",
+                "key": "1-10",
+                "url": "http://127.0.0.1:8080/django/"
+            },
+            {
+                "database": "test",
+                "collection": "fastapi",
+                "key": "11-20",
+                "url": "http://127.0.0.1:8000/fastapi/"
+            },
+            {
+                "database": "test",
+                "collection": "flask",
+                "key": "21-*",
+                "url": "http://127.0.0.1:5000/flaskapi/"
+            }
+        ]
+    }
+]
