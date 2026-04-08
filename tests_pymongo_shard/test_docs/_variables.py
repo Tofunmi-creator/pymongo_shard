@@ -252,17 +252,14 @@ class test_variable:
             mocker_dumps = mocker.patch('sys.getsizeof')
             mocker_dumps.return_value = 20000000
             m.post("http://test_url_django", 
-                    json = {'results':"None"}, 
                     status_code = 200)
             m.post("http://test_url_fastapi", 
-                    json = {'results':"None"}, 
                     status_code = 200)
             m.post("http://test_url_flask", 
-                    json = {'results':"None"}, 
                     status_code = 200)
             yield m
             for request in m.request_history:
-                request_json = json.loads(request.json())
+                request_json = request.json()
                 request_key = request_json["key"]
                 test_variable.batch_receiver_input_data.setdefault(request_key, []) 
                 test_variable.batch_receiver_input_data[request_key].append(request_json)

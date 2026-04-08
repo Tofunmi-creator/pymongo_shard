@@ -274,7 +274,7 @@ class Retriever():
                                           }
             partition['command'] = 'batch_receiver'     
             if batch:
-               requests.post(partition['url'], json=json.dumps(partition)).json()
+               requests.post(partition['url'], json=partition)
                
     def batch_receiver(self, query: dict) -> None:
         """Receive a batch of documents.

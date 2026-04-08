@@ -1,7 +1,7 @@
 from setuptools import setup
 setup(name='pymongo_shard',
       version='0.1.0',
-      description ='',
+      description ='A package to extract data via API requuests from server shards (endpoints) running pymongo, the official Python MongoDB driver.',
       packages=['pymongo_shard'],
       python_requires='>=3.11, !=4.0.*',
       install_requires = [
