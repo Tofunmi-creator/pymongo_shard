@@ -5,7 +5,7 @@ import pytest
 from pymongo_shard.shard_instance import ShardInstance 
 from tests_pymongo_shard.test_docs._variables import test_variable
  
-ShardInstance.key_file = os.path.join(os.path.dirname(__file__), 'test_docs/_keys.json')
+ShardInstance.key_file = os.path.join(os.path.dirname(__file__), 'test_docs/_reigistered_shards.json')
 
 
 def shard_id_checks(shard_instance, error):

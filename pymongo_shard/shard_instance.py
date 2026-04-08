@@ -6,8 +6,15 @@ import json
 class ShardInstance:
     """Represents a shard instance in the MongoDB sharding system."""
 
-    key_file  = os.path.join(os.path.dirname(__file__), 'keys.json')
+    key_file  = os.path.join(os.path.dirname(__file__), 'registered_shards.json')
     
+    @classmethod
+    def key_file_check(cls):
+        if not os.path.isfile(cls.key_file):
+            with open(cls.key_file,'w') as ids:
+                ids.write(json.dumps([]))
+                ids.close()
+
     @classmethod
     def get_registered_ids(cls) -> list:
         """Retrieve a list of registered shard IDs.
@@ -19,6 +26,7 @@ class ShardInstance:
         Returns:
             list: A list of registered shard IDs.
         """
+        cls.key_file_check()
         registered_ids = list()
         if 'shard_ids' in os.environ:
             registered_ids = json.loads(os.environ['shard_ids'])
@@ -36,6 +44,7 @@ class ShardInstance:
         """Remove all registered shard IDs.
         Writes an empty list to the 'pymongo_shard/keys.json' file.
         """
+        cls.key_file_check()
         with open(cls.key_file, 'w') as ids:
             ids.write(json.dumps([]))
             ids.close()
